@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<stdbool.h>
 
 typedef struct numNode
 {
@@ -156,7 +157,7 @@ void print_nums()
     {
         if(index % 2 == 0)
         {
-            printf("%.2f ", n -> data);
+            printf("%.2f", n -> data);
             n = n -> next;
         }
         else
@@ -219,10 +220,21 @@ void divide(int index)
     remove_sign(index);
 }
 
+bool check_sign_input(char* sign)
+{
+    int coun_size = 0;
+
+    while(*(sign + coun_size) != '\0'){
+        coun_size++;
+        if(coun_size == 2) return false;
+    }
+    return (*sign == '+' || *sign == '-' || *sign == '#' || *sign == '*' || *sign == '/');
+}
+
 int main()
 {
     int n;
-    printf("Enter the numbers of numbers: ");
+    printf("Enter the number of numbers: ");
     scanf("%d", &n);
     for(int i = 0; i < n + n -1; i++)
     {
@@ -234,9 +246,14 @@ int main()
         }
         else
         {
-            char sign;
-            scanf(" %c", &sign);
-            add_sign(sign);
+            char sign[3];
+            scanf("%2s", &sign);
+            if(!check_sign_input(sign)){
+                printf("Wrong format");
+                return 0;
+            }
+            char singleSign = sign[0];
+            add_sign(singleSign);
         }
     }
 
@@ -297,5 +314,6 @@ int main()
             }
         }
         priority--;
-    } 
+    }
+    return 0; 
 }
