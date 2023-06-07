@@ -155,6 +155,7 @@ void print_nums()
 
     while (n != NULL)
     {
+        if(sign_head == NULL) printf("Final result:\n");
         if(index % 2 == 0)
         {
             printf("%.2f", n -> data);
